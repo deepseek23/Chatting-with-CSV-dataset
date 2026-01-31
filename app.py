@@ -13,7 +13,7 @@ class OllamaLLM(LLM):
 
     def __init__(
         self,
-        model: str = "llama3",
+        model: str = "gemini-3-flash-preview:cloud",
         base_url: str = "http://localhost:11434",
         api_key: str | None = None,
     ) -> None:
@@ -45,7 +45,7 @@ class OllamaLLM(LLM):
             raise RuntimeError(f"Ollama call failed: {e}") from e
 
 
-ollama_llm = OllamaLLM(model="llama3", base_url="http://localhost:11434")
+ollama_llm = OllamaLLM(model="gemini-3-flash-preview:cloud", base_url="http://localhost:11434")
 config = Config(llm=ollama_llm)
 
 st.title("PandasAI + Ollama (LLaMA3)")

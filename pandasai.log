@@ -2835,3 +2835,180 @@ Traceback (most recent call last):
     raise CodeExecutionError("Code execution failed") from e
 pandasai.exceptions.CodeExecutionError: Code execution failed
 
+2026-01-31 17:35:24 [INFO] Question: what is the average age  ?
+
+2026-01-31 17:35:24 [INFO] Running PandasAI with ollama LLM...
+2026-01-31 17:35:24 [INFO] Prompt ID: 6bb1ad72-f92c-4be8-9461-6f809e3f1ed4
+2026-01-31 17:35:24 [INFO] Generating new code...
+2026-01-31 17:35:24 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_e9293185bcdcc9cbdfc27af947046b8d" columns="[{"name": "Age", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Sex", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ChestPainType", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "RestingBP", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Cholesterol", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "FastingBS", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RestingECG", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "MaxHR", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "ExerciseAngina", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Oldpeak", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "ST_Slope", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "HeartDisease", "type": "integer", "description": null, "expression": null, "alias": null}]" dimensions="918x12">
+Age,Sex,ChestPainType,RestingBP,Cholesterol,FastingBS,RestingECG,MaxHR,ExerciseAngina,Oldpeak,ST_Slope,HeartDisease
+40,M,ATA,140,289,0,Normal,172,N,0.0,Up,0
+49,F,NAP,160,180,0,Normal,156,N,1.0,Flat,1
+37,M,ATA,130,283,0,ST,98,N,0.0,Up,0
+48,F,ASY,138,214,0,Normal,108,Y,1.5,Flat,1
+54,M,NAP,150,195,0,Normal,122,N,0.0,Up,0
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is the average age  ?
+
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2026-01-31 17:35:30 [INFO] Code Generated:
+# import the required dependencies
+import pandas as pd
+
+# Define the SQL query to calculate the average age
+sql_query = "SELECT AVG(Age) as average_age FROM table_e9293185bcdcc9cbdfc27af947046b8d"
+
+# Execute the query and get the result as a dataframe
+df = execute_sql_query(sql_query)
+
+# Extract the average age value from the dataframe
+average_age = df.iloc[0]['average_age']
+
+# Declare result var: 
+result = { "type": "number", "value": average_age }
+2026-01-31 17:35:30 [INFO] Validating code requirements...
+2026-01-31 17:35:30 [INFO] Code validation successful.
+2026-01-31 17:35:30 [INFO] Cleaning the generated code...
+2026-01-31 17:35:30 [INFO] Executing code: import pandas as pd
+sql_query = 'SELECT AVG(Age) as average_age FROM table_e9293185bcdcc9cbdfc27af947046b8d'
+df = execute_sql_query(sql_query)
+average_age = df.iloc[0]['average_age']
+result = {'type': 'number', 'value': average_age}
+2026-01-31 17:35:31 [INFO] Response generated successfully.
+2026-01-31 17:37:20 [INFO] Question: give a heatmap of correlation of heart disease and other columns 
+
+2026-01-31 17:37:20 [INFO] Running PandasAI with ollama LLM...
+2026-01-31 17:37:20 [INFO] Prompt ID: df4ef82f-b8a3-4c57-9d26-70ecb2b34b3a
+2026-01-31 17:37:20 [INFO] Generating new code...
+2026-01-31 17:37:20 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_e9293185bcdcc9cbdfc27af947046b8d" columns="[{"name": "Age", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Sex", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ChestPainType", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "RestingBP", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Cholesterol", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "FastingBS", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RestingECG", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "MaxHR", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "ExerciseAngina", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Oldpeak", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "ST_Slope", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "HeartDisease", "type": "integer", "description": null, "expression": null, "alias": null}]" dimensions="918x12">
+Age,Sex,ChestPainType,RestingBP,Cholesterol,FastingBS,RestingECG,MaxHR,ExerciseAngina,Oldpeak,ST_Slope,HeartDisease
+40,M,ATA,140,289,0,Normal,172,N,0.0,Up,0
+49,F,NAP,160,180,0,Normal,156,N,1.0,Flat,1
+37,M,ATA,130,283,0,ST,98,N,0.0,Up,0
+48,F,ASY,138,214,0,Normal,108,Y,1.5,Flat,1
+54,M,NAP,150,195,0,Normal,122,N,0.0,Up,0
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ give a heatmap of correlation of heart disease and other columns 
+
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2026-01-31 17:37:31 [INFO] Code Generated:
+# import the required dependencies
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Fetch the data from the table
+# Correlation calculations usually require numerical data. We fetch all columns and then filter in pandas.
+df = execute_sql_query("SELECT * FROM table_e9293185bcdcc9cbdfc27af947046b8d")
+
+# Select only numerical columns for the correlation matrix
+numerical_df = df.select_dtypes(include=['number'])
+
+# Calculate the correlation matrix
+corr_matrix = numerical_df.corr()
+
+# Create the heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5)
+plt.title("Correlation Heatmap: Heart Disease and Numerical Features")
+
+# Save the plot to a file
+output_file = "heart_disease_correlation_heatmap.png"
+plt.savefig(output_file)
+plt.close()
+
+# Declare result var: 
+result = { "type": "plot", "value": output_file }
+2026-01-31 17:37:31 [INFO] Validating code requirements...
+2026-01-31 17:37:31 [INFO] Code validation successful.
+2026-01-31 17:37:31 [INFO] Cleaning the generated code...
+2026-01-31 17:37:31 [INFO] Executing code: import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+df = execute_sql_query('SELECT * FROM table_e9293185bcdcc9cbdfc27af947046b8d')
+numerical_df = df.select_dtypes(include=['number'])
+corr_matrix = numerical_df.corr()
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+plt.title('Correlation Heatmap: Heart Disease and Numerical Features')
+output_file = 'exports\\charts\\temp_chart_b18964f9-bfbf-45e5-89b6-95cda276ac39.png'
+plt.savefig(output_file)
+plt.close()
+result = {'type': 'plot', 'value': output_file}
+2026-01-31 17:37:38 [INFO] Response generated successfully.
